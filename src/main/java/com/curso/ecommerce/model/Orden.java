@@ -2,8 +2,20 @@ package com.curso.ecommerce.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "ordenes")
 public class Orden {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String numero;
 	private Date fechaCreacion;
@@ -11,18 +23,29 @@ public class Orden {
 	
 	private double total;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
+	@OneToOne(mappedBy = "orden")
+	private DetalleOrden detalle;
+	
 	public Orden() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total) {
+	public Orden(Integer id, String numero, Date fechaCreacion, Date fechaRecibida, double total, Usuario usuario,
+			DetalleOrden detalle) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaRecibida = fechaRecibida;
 		this.total = total;
+		this.usuario = usuario;
+		this.detalle = detalle;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -63,13 +86,27 @@ public class Orden {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public DetalleOrden getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(DetalleOrden detalle) {
+		this.detalle = detalle;
+	}
 
 	@Override
 	public String toString() {
 		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
 				+ fechaRecibida + ", total=" + total + "]";
 	}
-	
-	
 
 }
