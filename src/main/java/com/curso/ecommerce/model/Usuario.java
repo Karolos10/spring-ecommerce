@@ -2,7 +2,6 @@ package com.curso.ecommerce.model;
 
 import java.util.List;
 
-import javax.swing.Spring;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
